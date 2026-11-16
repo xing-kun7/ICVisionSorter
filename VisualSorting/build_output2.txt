@@ -1,0 +1,12 @@
+閫傜敤浜?.NET Framework MSBuild 鐗堟湰 18.4.0+6e61e96ac
+
+H:\VS椤圭洰\packages\CommunityToolkit.Mvvm.8.4.0\build\CommunityToolkit.Mvvm.SourceGenerators.targets(144,5): warning MVVMTKCFG0002: The MVVM Toolkit source generators might not be loaded correctly, as the current project is using the packages.config setup to restore NuGet packages. Source generators require PackageReference to be used (either in a legacy-style or SDK-style .csproj project, both are supported as long as PackageReference is used). [H:\VS椤圭洰\VisualSorting\VisualSorting.csproj]
+H:\VS椤圭洰\VisualSorting\Services\DetectionService.cs(56,25): warning CS0649: 浠庢湭瀵瑰瓧娈碘€淒etectionService.ho_checkRectXid2鈥濊祴鍊硷紝瀛楁灏嗕竴鐩翠繚鎸佸叾榛樿鍊?null [H:\VS椤圭洰\VisualSorting\VisualSorting_mevudhbl_wpftmp.csproj]
+H:\VS椤圭洰\VisualSorting\Services\DetectionService.cs(50,25): warning CS0649: 浠庢湭瀵瑰瓧娈碘€淒etectionService.ho_checkRectXid鈥濊祴鍊硷紝瀛楁灏嗕竴鐩翠繚鎸佸叾榛樿鍊?null [H:\VS椤圭洰\VisualSorting\VisualSorting_mevudhbl_wpftmp.csproj]
+H:\VS椤圭洰\VisualSorting\Services\DetectionService.cs(74,41): warning CS0169: 浠庝笉浣跨敤瀛楁鈥淒etectionService._captureCts鈥?[H:\VS椤圭洰\VisualSorting\VisualSorting_mevudhbl_wpftmp.csproj]
+H:\VS椤圭洰\VisualSorting\Services\TemplateService.cs(46,25): warning CS0414: 瀛楁鈥淭emplateService.ho_modelContours鈥濆凡琚祴鍊硷紝浣嗕粠鏈娇鐢ㄨ繃瀹冪殑鍊?[H:\VS椤圭洰\VisualSorting\VisualSorting_mevudhbl_wpftmp.csproj]
+H:\VS椤圭洰\VisualSorting\Services\DetectionService.cs(56,25): warning CS0649: 浠庢湭瀵瑰瓧娈碘€淒etectionService.ho_checkRectXid2鈥濊祴鍊硷紝瀛楁灏嗕竴鐩翠繚鎸佸叾榛樿鍊?null [H:\VS椤圭洰\VisualSorting\VisualSorting.csproj]
+H:\VS椤圭洰\VisualSorting\Services\DetectionService.cs(74,41): warning CS0169: 浠庝笉浣跨敤瀛楁鈥淒etectionService._captureCts鈥?[H:\VS椤圭洰\VisualSorting\VisualSorting.csproj]
+H:\VS椤圭洰\VisualSorting\Services\DetectionService.cs(50,25): warning CS0649: 浠庢湭瀵瑰瓧娈碘€淒etectionService.ho_checkRectXid鈥濊祴鍊硷紝瀛楁灏嗕竴鐩翠繚鎸佸叾榛樿鍊?null [H:\VS椤圭洰\VisualSorting\VisualSorting.csproj]
+H:\VS椤圭洰\VisualSorting\Services\TemplateService.cs(46,25): warning CS0414: 瀛楁鈥淭emplateService.ho_modelContours鈥濆凡琚祴鍊硷紝浣嗕粠鏈娇鐢ㄨ繃瀹冪殑鍊?[H:\VS椤圭洰\VisualSorting\VisualSorting.csproj]
+  VisualSorting -> H:\VS椤圭洰\VisualSorting\bin\Debug\VisualSorting.exe

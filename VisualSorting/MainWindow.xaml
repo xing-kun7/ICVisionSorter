@@ -1,0 +1,16 @@
+<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="VisualSorting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VisualSorting"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Height="650" Width ="600"
+        Title="IC芯片分拣系统" >
+    <Grid>
+        <!-- container:页面切换的容器 所有的子页面切换到这里显示-->
+        <ContentControl x:Name="container"/>
+      
+    </Grid>
+</mah:MetroWindow>

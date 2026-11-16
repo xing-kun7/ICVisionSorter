@@ -1,0 +1,223 @@
+<UserControl x:Class="VisualSorting.Views.YoloDetectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VisualSorting.Views"
+             xmlns:vm="clr-namespace:VisualSorting.ViewModels"
+             xmlns:halcon="clr-namespace:HalconDotNet;assembly=halcondotnet"
+             d:DataContext="{d:DesignInstance vm:YoloDetectionViewModel}"
+             mc:Ignorable="d" 
+             Background="Transparent"
+             d:DesignHeight="950" d:DesignWidth="1400">
+    <UserControl.DataContext>
+        <vm:YoloDetectionViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#1E3A5F"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BtnBorder" Background="{TemplateBinding Background}" CornerRadius="3" BorderBrush="#2E5077" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BtnBorder" Property="Background" Value="#2E5077"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="BtnBorder" Property="Background" Value="#0F2847"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="BtnBorder" Property="Background" Value="#6B6B6B"/>
+                                <Setter Property="Foreground" Value="#9E9E9E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernPanelStyle" TargetType="Border">
+            <Setter Property="Background" Value="#F5F5F5"/>
+            <Setter Property="BorderBrush" Value="#D0D0D0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+
+        <Style x:Key="NavigationButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#0D47A1"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Polygon x:Name="ButtonShape" 
+                                     Points="8,0 100,0 92,32 0,32"
+                                     Fill="{TemplateBinding Background}"
+                                     Stroke="#1565C0"
+                                     StrokeThickness="1.5"
+                                     Stretch="Fill"
+                                     Width="100"
+                                     Height="32"/>
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"
+                                            RecognizesAccessKey="True"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonShape" Property="Fill" Value="#1565C0"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonShape" Property="Fill" Value="#0A3D91"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ButtonShape" Property="Fill" Value="#6B6B6B"/>
+                                <Setter Property="Foreground" Value="#9E9E9E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#C8C8C8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#08316B" Padding="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="20,0">
+                    <TextBlock Text="YOLO智能检测系统" 
+                               Foreground="White" FontSize="18" FontWeight="Bold"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding DetectionStatus}" 
+                               Foreground="White" FontSize="14" FontWeight="Medium"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,20,0">
+                    <TextBlock Text="操作员:半岛冰茶" 
+                               Foreground="White" FontSize="13" 
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 导航按钮栏 -->
+        <Border Grid.Row="1" Background="#0A3D91" Padding="10,5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button x:Name="BtnMainView" Content="主界面" 
+                        Click="BtnMainView_Click"
+                        Style="{StaticResource NavigationButtonStyle}"/>
+                <Button x:Name="BtnYoloDetection" Content="YOLO检测" 
+                        Click="BtnYoloDetection_Click"
+                        Style="{StaticResource NavigationButtonStyle}"/>
+                <Button x:Name="BtnLogout" Content="退出登录" 
+                        Click="BtnLogout_Click"
+                        Style="{StaticResource NavigationButtonStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="380"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Border Style="{StaticResource ModernPanelStyle}">
+                        <StackPanel>
+                            <TextBlock Text="相机控制" FontSize="14" FontWeight="Bold" Foreground="#1E3A5F" Margin="0,0,0,10"/>
+                            <Button Content="打开相机" Command="{Binding OpenCameraCommand}" Style="{StaticResource PrimaryButtonStyle}" Margin="0,5"/>
+                            <Button Content="关闭相机" Command="{Binding CloseCameraCommand}" Style="{StaticResource PrimaryButtonStyle}" Margin="0,5"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource ModernPanelStyle}">
+                        <StackPanel>
+                            <TextBlock Text="YOLO检测控制" FontSize="14" FontWeight="Bold" Foreground="#1E3A5F" Margin="0,0,0,10"/>
+                            <Button Content="开始检测" Command="{Binding StartDetectionCommand}" Style="{StaticResource PrimaryButtonStyle}" Margin="0,5"/>
+                            <Button Content="停止检测" Command="{Binding StopDetectionCommand}" Style="{StaticResource PrimaryButtonStyle}" Margin="0,5"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Border Grid.Column="1" Style="{StaticResource ModernPanelStyle}" Margin="10,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="图像显示" FontSize="14" FontWeight="Bold" Foreground="#1E3A5F" Margin="0,0,0,10"/>
+                    <halcon:HSmartWindowControlWPF Grid.Row="1" x:Name="Hsmart" 
+                                                   Background="Black" 
+                                                   HorizontalAlignment="Stretch" 
+                                                   VerticalAlignment="Stretch"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource ModernPanelStyle}" Margin="10,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="运行日志" FontSize="14" FontWeight="Bold" Foreground="#1E3A5F" Margin="0,0,0,10"/>
+                    <ListBox Grid.Row="1" ItemsSource="{Binding LogEntries}" 
+                             Background="White" BorderThickness="0"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2">
+                                    <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm:ss}'}" 
+                                               FontSize="10" Foreground="#666"/>
+                                    <TextBlock Text="{Binding Message}" 
+                                               FontSize="11" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="3" Background="#08316B" Padding="10">
+            <TextBlock Text="© 2026 IC芯片分拣系统 - YOLO智能检测系统" 
+                       Foreground="#E0E0E0" FontSize="12" 
+                       HorizontalAlignment="Center"/>
+        </Border>
+    </Grid>
+</UserControl>

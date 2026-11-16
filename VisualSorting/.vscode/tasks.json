@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "MSBuild 编译 .NET Framework 4.7.2 WPF项目",
+            "type": "process",
+            "command": "msbuild",
+            "args": [
+                "${workspaceFolder}/VisualSorting.csproj",
+                "/t:Build",
+                "/p:Configuration=Debug",
+                "/p:Platform=AnyCPU",
+                "/p:TargetFrameworkVersion=v4.7.2"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "用VS自带MSBuild编译，解决InitializeComponent报错"
+        }
+    ]
+}

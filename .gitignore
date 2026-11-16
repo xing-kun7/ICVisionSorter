@@ -1,0 +1,27 @@
+## Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+## Build outputs
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## NuGet packages
+packages/
+*.nupkg
+!**/packages.config
+
+## Standalone test executables
+bin_tests.exe
+test_halcon_control.exe
+
+## Temporary & Cache
+*.cache
+*.tmp
+Thumbs.db
+[Dd]esktop.ini
